@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_infinite_scroll/podo/infinite_scroll_podo.dart';
 import 'package:flutter_infinite_scroll/repositories/i_data_repo.dart';
 import 'package:equatable/equatable.dart';

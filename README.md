@@ -7,6 +7,7 @@ Opinionated  package to lazily load and display small chunks of items as the use
 Install package with: flutter pub add flutter_infinite_scroll
 
 ## Default options
+
 InfiniteScrollPage(
       loadMoreEnabled: false,
        perPage: 10,

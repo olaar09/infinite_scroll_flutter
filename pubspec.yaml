@@ -1,7 +1,7 @@
 name: flutter_infinite_scroll
-description: Opinionated  package to help you lazily load and display small chunks of items as the user scrolls down the screen
+description: Opinionated  package to lazily load and display small chunks of items as the user scrolls down the screen
 version: 0.0.1
-homepage:
+homepage: https://github.com/olaar09/infinite_scroll_flutter
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
