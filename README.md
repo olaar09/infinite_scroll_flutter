@@ -1,7 +1,7 @@
 # flutter_infinite_scroll
 Intended for personal use in my projects but feel free to use also.
 
-Opinionated  package to lazily load and display small chunks of items as the user scrolls down the screen
+Opinionated  package to lazily load and display small chunks of items as the user scrolls down the screen. Uses Dio and flutter bloc library
 
 ## Getting Started
 Install package with: flutter pub add flutter_infinite_scroll
