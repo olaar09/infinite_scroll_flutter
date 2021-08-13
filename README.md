@@ -1,14 +1,30 @@
 # flutter_infinite_scroll
+Intended for personal use in my projects but feel free to use also.
 
-Opinionated  package to help you lazily load and display small chunks of items as the user scrolls down the screen
+Opinionated  package to lazily load and display small chunks of items as the user scrolls down the screen
 
 ## Getting Started
+Install package with: flutter pub add flutter_infinite_scroll
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+## Default options
+InfiniteScrollPage(
+      loadMoreEnabled: false,
+       perPage: 10,
+       debounceMaxPeriod: 5000, // milliseconds,
+   },
+);
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## Usage
+- Data endpoint must return  a single array like following
+    [
+        {
+            id: 1,
+            title: 'data title',
+            description: 'data description',
+            avatarPath: 'avatar path' (optional)
+        },
+        ... ...
+    ]
+
+- Endpoint is Post fixed with ?page=0 to help server side determine the next page
+  e.g: https://example.com?page=1
