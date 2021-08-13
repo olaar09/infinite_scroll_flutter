@@ -8,9 +8,10 @@ class DataRepository implements IDataRepository {
 
   DataRepository({required Dio restClient}) : _restClient = restClient;
 
-  Future<List<DataPODO>> fetchData(url) async {
+  Future<List<DataPODO>> fetchData(url, nextPage) async {
+    print('page number $nextPage');
     try {
-      Response response = await _restClient.get('$url');
+      Response response = await _restClient.get('$url?page=$nextPage');
       RequestResponse parseResponse = response.data;
       return DataPODO().fromJsonArr(parseResponse.data);
     } on DioError catch (e) {

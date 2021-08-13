@@ -1,4 +1,4 @@
-part of 'bloc.dart';
+part of 'cubit.dart';
 
 class FetchDataState extends Union4Impl<_Initial, _Loaded, _Error, _Loading> {
   // PRIVATE low-level factory
@@ -13,14 +13,16 @@ class FetchDataState extends Union4Impl<_Initial, _Loaded, _Error, _Loading> {
   factory FetchDataState.initial() =>
       FetchDataState._(_factory.first(_Initial()));
 
-  factory FetchDataState.loaded(List data) =>
+  factory FetchDataState.loaded(List<DataPODO> data) =>
       FetchDataState._(_factory.second(_Loaded(data: data)));
 
   factory FetchDataState.error({generic = ''}) =>
       FetchDataState._(_factory.third(_Error(generic: generic)));
 
-  factory FetchDataState.loading() =>
-      FetchDataState._(_factory.fourth(_Loading()));
+  factory FetchDataState.loading(
+          {List<DataPODO>? oldData, bool isLoadMore = false}) =>
+      FetchDataState._(
+          _factory.fourth(_Loading(oldData: oldData, isLoadMore: isLoadMore)));
 }
 
 class _Initial extends Equatable {
@@ -30,13 +32,18 @@ class _Initial extends Equatable {
 }
 
 class _Loading extends Equatable {
+  final List<DataPODO>? oldData;
+  final bool isLoadMore;
+
+  _Loading({this.oldData, this.isLoadMore = false});
+
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
 class _Loaded extends Equatable {
-  final List data;
+  final List<DataPODO> data;
 
   _Loaded({required this.data});
 
