@@ -150,7 +150,6 @@ class _InfiniteScrollPageState extends State<InfiniteScrollPage> {
   }
 
   Widget buildList(List<DataPODO> data) {
-    print('display data length ${data.length}');
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(

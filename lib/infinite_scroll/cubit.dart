@@ -20,7 +20,6 @@ class InfiniteScrollCubit extends Cubit<FetchDataState> {
   }
 
   dispatchLoadMoreEvent(String url, List<DataPODO> oldData) async {
-    print('loading more');
     this.emit(FetchDataState.loading(oldData: oldData, isLoadMore: true));
     await Future.delayed(Duration(seconds: 3));
     await this.fetchDataJoin(url, oldData);
@@ -45,7 +44,6 @@ class InfiniteScrollCubit extends Cubit<FetchDataState> {
   }
 
   fetchDataJoin(String url, List<DataPODO> oldData) async {
-    print('old data length  ${oldData.length}');
     try {
       List<DataPODO> data = await dataRepo.fetchData(url, nextPage);
       final newData = [...oldData, ...data];
