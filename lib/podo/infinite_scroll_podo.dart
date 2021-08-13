@@ -1,11 +1,11 @@
-class DataPODO {
+class InfiniteScrollPODO {
   int id;
   String avatarPath;
   String title;
   String description;
   String createdAt;
 
-  DataPODO({
+  InfiniteScrollPODO({
     this.id = 0,
     this.avatarPath = '',
     this.title = '',
@@ -13,7 +13,7 @@ class DataPODO {
     this.createdAt = '',
   });
 
-  DataPODO.setData({
+  InfiniteScrollPODO.setData({
     required this.id,
     required this.avatarPath,
     required this.title,
@@ -21,8 +21,8 @@ class DataPODO {
     required this.createdAt,
   });
 
-  factory DataPODO.fromJson(Map<dynamic, dynamic> map) {
-    return DataPODO.setData(
+  factory InfiniteScrollPODO.fromJson(Map<dynamic, dynamic> map) {
+    return InfiniteScrollPODO.setData(
       id: map['id'] ?? 0,
       avatarPath: '${map['avatarPath']}',
       title: '${map['title']}',
@@ -31,7 +31,8 @@ class DataPODO {
     );
   }
 
-  List<DataPODO> fromJsonArr(List list) {
-    return List<DataPODO>.from(list.map((x) => DataPODO.fromJson(x)));
+  List<InfiniteScrollPODO> fromJsonArr(List list) {
+    return List<InfiniteScrollPODO>.from(
+        list.map((x) => InfiniteScrollPODO.fromJson(x)));
   }
 }

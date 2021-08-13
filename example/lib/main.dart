@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_infinite_scroll/flutter_infinite_scroll.dart';
 import 'package:flutter_infinite_scroll/infinite_scroll/view.dart';
-import 'package:flutter_infinite_scroll/podo/data_podo.dart';
+import 'package:flutter_infinite_scroll/podo/infinite_scroll_podo.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       ),
       home: InfiniteScrollPage(
         dataUrl: dataUrl,
-        child: (DataPODO data) {
+        loadMoreEnabled: false,
+        child: (InfiniteScrollPODO data) {
           return ListTile(
             title: Text('${data.title}'),
           );

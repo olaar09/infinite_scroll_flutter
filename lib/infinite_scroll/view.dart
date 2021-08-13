@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_infinite_scroll/infinite_scroll/cubit.dart';
-import 'package:flutter_infinite_scroll/podo/data_podo.dart';
+import 'package:flutter_infinite_scroll/podo/infinite_scroll_podo.dart';
 import 'package:flutter_infinite_scroll/repositories/data_repo.dart';
 import 'package:flutter_infinite_scroll/repositories/i_data_repo.dart';
 import 'package:flutter_infinite_scroll/util/rest_client.dart';
@@ -11,16 +11,18 @@ class InfiniteScrollPage extends StatefulWidget {
   final String dataUrl;
   final int perPage;
   final int debounceMaxPeriod;
-  late final Function(DataPODO data)? child;
+  final bool loadMoreEnabled;
+  late final Function(InfiniteScrollPODO data)? child;
 
   InfiniteScrollPage({
     required this.dataUrl,
     this.child,
     this.perPage = 10,
     this.debounceMaxPeriod = 5000,
+    this.loadMoreEnabled = true,
   });
 
-  Container buildWidgetItem(DataPODO data) {
+  Container buildWidgetItem(InfiniteScrollPODO data) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5),
       child: Column(
@@ -53,7 +55,7 @@ class _InfiniteScrollPageState extends State<InfiniteScrollPage> {
   bool listenerAdded = false;
   int debounceEnd = 0;
   int debounceStart = 0;
-  List<DataPODO> oldData = [];
+  List<InfiniteScrollPODO> oldData = [];
 
   @override
   void initState() {
@@ -79,9 +81,11 @@ class _InfiniteScrollPageState extends State<InfiniteScrollPage> {
           state.join(
             (_) => setBottomLoading(),
             (loaded) {
-              oldData = loaded.data;
-              onScrollToBottom();
-              setBottomLoading();
+              if (widget.loadMoreEnabled) {
+                oldData = loaded.data;
+                onScrollToBottom();
+                setBottomLoading();
+              }
             },
             (error) => setBottomLoading(),
             (loading) {
@@ -149,7 +153,7 @@ class _InfiniteScrollPageState extends State<InfiniteScrollPage> {
     }
   }
 
-  Widget buildList(List<DataPODO> data) {
+  Widget buildList(List<InfiniteScrollPODO> data) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(

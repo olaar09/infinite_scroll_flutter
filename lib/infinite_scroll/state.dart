@@ -13,14 +13,14 @@ class FetchDataState extends Union4Impl<_Initial, _Loaded, _Error, _Loading> {
   factory FetchDataState.initial() =>
       FetchDataState._(_factory.first(_Initial()));
 
-  factory FetchDataState.loaded(List<DataPODO> data) =>
+  factory FetchDataState.loaded(List<InfiniteScrollPODO> data) =>
       FetchDataState._(_factory.second(_Loaded(data: data)));
 
   factory FetchDataState.error({generic = ''}) =>
       FetchDataState._(_factory.third(_Error(generic: generic)));
 
   factory FetchDataState.loading(
-          {List<DataPODO>? oldData, bool isLoadMore = false}) =>
+          {List<InfiniteScrollPODO>? oldData, bool isLoadMore = false}) =>
       FetchDataState._(
           _factory.fourth(_Loading(oldData: oldData, isLoadMore: isLoadMore)));
 }
@@ -32,7 +32,7 @@ class _Initial extends Equatable {
 }
 
 class _Loading extends Equatable {
-  final List<DataPODO>? oldData;
+  final List<InfiniteScrollPODO>? oldData;
   final bool isLoadMore;
 
   _Loading({this.oldData, this.isLoadMore = false});
@@ -43,7 +43,7 @@ class _Loading extends Equatable {
 }
 
 class _Loaded extends Equatable {
-  final List<DataPODO> data;
+  final List<InfiniteScrollPODO> data;
 
   _Loaded({required this.data});
 

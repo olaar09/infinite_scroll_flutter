@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_infinite_scroll/podo/data_podo.dart';
+import 'package:flutter_infinite_scroll/podo/infinite_scroll_podo.dart';
 import 'package:flutter_infinite_scroll/repositories/i_data_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sealed_unions/sealed_unions.dart';
@@ -12,14 +12,14 @@ class InfiniteScrollCubit extends Cubit<FetchDataState> {
 
   InfiniteScrollCubit(this.dataRepo) : super(FetchDataState.initial());
 
-  dispatchRefreshEvent(String url, List<DataPODO> oldData) async {
+  dispatchRefreshEvent(String url, List<InfiniteScrollPODO> oldData) async {
     resetPage();
     this.emit(FetchDataState.loading(oldData: oldData));
     await Future.delayed(Duration(seconds: 3));
     await this.fetchDataOnce(url);
   }
 
-  dispatchLoadMoreEvent(String url, List<DataPODO> oldData) async {
+  dispatchLoadMoreEvent(String url, List<InfiniteScrollPODO> oldData) async {
     this.emit(FetchDataState.loading(oldData: oldData, isLoadMore: true));
     await Future.delayed(Duration(seconds: 3));
     await this.fetchDataJoin(url, oldData);
@@ -32,7 +32,7 @@ class InfiniteScrollCubit extends Cubit<FetchDataState> {
 
   fetchDataOnce(String url) async {
     try {
-      List<DataPODO> data = await dataRepo.fetchData(url, nextPage);
+      List<InfiniteScrollPODO> data = await dataRepo.fetchData(url, nextPage);
       this.emit(FetchDataState.loaded(data));
       incrementPage();
     } catch (e) {
@@ -43,9 +43,9 @@ class InfiniteScrollCubit extends Cubit<FetchDataState> {
     }
   }
 
-  fetchDataJoin(String url, List<DataPODO> oldData) async {
+  fetchDataJoin(String url, List<InfiniteScrollPODO> oldData) async {
     try {
-      List<DataPODO> data = await dataRepo.fetchData(url, nextPage);
+      List<InfiniteScrollPODO> data = await dataRepo.fetchData(url, nextPage);
       final newData = [...oldData, ...data];
       this.emit(FetchDataState.loaded(newData));
       incrementPage();
