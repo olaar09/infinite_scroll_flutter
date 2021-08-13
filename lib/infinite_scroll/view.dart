@@ -134,7 +134,6 @@ class _InfiniteScrollPageState extends State<InfiniteScrollPage> {
         _scrollController.position.maxScrollExtent) {
       setState(() {
         debounceStart = DateTime.now().millisecondsSinceEpoch;
-        print('since epoch ${debounceStart - debounceEnd}');
       });
 
       if ((debounceStart == 0 ||
@@ -144,6 +143,8 @@ class _InfiniteScrollPageState extends State<InfiniteScrollPage> {
         setState(() {
           debounceEnd = DateTime.now().millisecondsSinceEpoch;
         });
+      } else {
+        print('debounce active ==> since epoch ${debounceStart - debounceEnd}');
       }
     }
   }
